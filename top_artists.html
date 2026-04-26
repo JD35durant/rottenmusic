@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Top Artistes par genre</h2>
+
+<div class="row">
+    {% for genre in genres %}
+    <div class="col-md-3 mb-4">
+
+        <a href="/top10/artists/{{ genre }}" style="text-decoration:none;">
+
+            <div class="card bg-dark text-white shadow-sm">
+
+                <img src="/static/images/artists/{{ genre }}.jpg"
+                     class="card-img-top"
+                     style="height:180px; object-fit:cover;">
+
+                <div class="card-body text-center">
+                    <h5>{{ genre | capitalize }}</h5>
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+   

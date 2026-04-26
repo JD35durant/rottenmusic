@@ -1,0 +1,3 @@
+body { background:#121212; color:white; }
+.star { font-size:28px; cursor:pointer; color:#555; }
+.star.selected { color:#FFD369; }

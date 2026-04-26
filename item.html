@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="{{ item.image_url }}" class="img-fluid rounded">
+    </div>
+
+    <div class="col-md-8">
+        <h2 class="text-warning">{{ item.display_info() }}</h2>
+        <p>⭐ {{ item.get_average_rating() }}/10 ({{ item.reviews|length }} critiques)</p>
+
+        <a href="/review/{{ item.get_type() }}/{{ item.id }}" class="btn btn-warning mb-3">
+            Ajouter une critique
+        </a>
+
+        <hr>
+
+        {% for r in item.reviews %}
+        <div class="bg-secondary p-3 rounded mb-3">
+            <strong>{{ r.user.username }}</strong>
+            <span class="text-warning">{{ r.rating }}/10</span>
+            <p class="mt-2">{{ r.comment }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

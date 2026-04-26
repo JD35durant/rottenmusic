@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-warning mb-4">Ajouter une critique</h2>
+
+<form method="POST" class="bg-secondary p-4 rounded">
+
+    <input type="hidden" name="rating" id="rating" value="0">
+
+    <div class="mb-3">
+        {% for i in range(1,11) %}
+            <span class="star" data-value="{{ i }}">★</span>
+        {% endfor %}
+    </div>
+
+    <textarea name="comment" class="form-control" rows="4"
+              placeholder="Votre avis..."></textarea>
+
+    <button class="btn btn-warning mt-3">Envoyer</button>
+</form>
+
+{% endblock %}

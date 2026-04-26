@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-warning mb-4">Artistes</h2>
+
+<div class="row g-4">
+    {% for artist in artists %}
+    <div class="col-md-3">
+        <div class="card bg-secondary text-light h-100">
+            <img src="{{ artist.image_url }}" class="card-img-top" style="height:220px;object-fit:cover">
+            <div class="card-body">
+                <h5>{{ artist.name }}</h5>
+                <p class="text-muted">{{ artist.genre }}</p>
+                <a href="/item/artist/{{ artist.id }}" class="btn btn-warning btn-sm">Voir</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<hr class="my-5">
+
+<h2 class="text-warning mb-4">Albums</h2>
+
+<div class="row g-4">
+    {% for album in albums %}
+    <div class="col-md-3">
+        <div class="card bg-secondary text-light h-100">
+            <img src="{{ album.image_url }}" class="card-img-top" style="height:220px;object-fit:cover">
+            <div class="card-body">
+                <h5>{{ album.title }}</h5>
+                <p class="text-muted">{{ album.genre }}</p>
+                <a href="/item/album/{{ album.id }}" class="btn btn-warning btn-sm">Voir</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

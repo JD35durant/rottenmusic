@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Top Artistes — {{ genre }}</h2>
+
+<div class="row">
+    {% for artist in artists %}
+    <div class="col-md-3">
+        <div class="card bg-secondary text-light">
+
+            <img src="{{ artist.image_url }}" class="card-img-top">
+
+            <div class="card-body">
+                <h5>{{ artist.name }}</h5>
+				<p>{{ artist.genre }}</p>   
+                <p>⭐ {{ artist.avg_rating | round(1) }}/10</p>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

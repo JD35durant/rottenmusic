@@ -1,0 +1,71 @@
+<h1>PAGE TOP10</h1>
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="text-warning mb-4">
+    Top 10 — {{ genre | capitalize }}
+</h2>
+
+<!-- ===================== ARTISTES ===================== -->
+<h3 class="mb-3">Top Artistes</h3>
+
+{% if artists and artists|length > 0 %}
+<div class="row g-4 mb-5">
+    {% for artist in artists %}
+    <div class="col-md-3">
+        <div class="card bg-secondary text-light h-100">
+
+            <img src="{{ artist.image_url or '/static/images/no-image.png' }}"
+                 class="card-img-top"
+                 style="height:200px;object-fit:cover">
+
+            <div class="card-body">
+                <h5>{{ artist.name }}</h5>
+                <p class="text-muted">{{ artist.genre }}</p>
+                <p>⭐ {{ artist.avg_rating | round(1) }}/10</p>
+
+                <a href="/item/artist/{{ artist.id }}" class="btn btn-warning btn-sm w-100">
+                    Voir
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>Aucun artiste trouvé.</p>
+{% endif %}
+
+<!-- ===================== ALBUMS ===================== -->
+<h3 class="mb-3">Top Albums</h3>
+
+{% if albums and albums|length > 0 %}
+<div class="row g-4">
+    {% for album in albums %}
+    <div class="col-md-3">
+        <div class="card bg-secondary text-light h-100">
+
+            <img src="{{ album.image_url or '/static/images/no-image.png' }}"
+                 class="card-img-top"
+                 style="height:200px;object-fit:cover">
+
+            <div class="card-body">
+                <h5>{{ album.title }}</h5>
+                <p class="text-muted">{{ album.artist_name }}</p>
+                <p>⭐ {{ album.avg_rating | round(1) }}/10</p>
+
+                <a href="/item/album/{{ album.id }}" class="btn btn-warning btn-sm w-100">
+                    Voir
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>Aucun album trouvé.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-warning mb-4">Recherche d'artistes</h2>
+
+<form method="GET" class="mb-4">
+    <input class="form-control" type="text" name="q" value="{{ query }}" placeholder="Nom d'artiste">
+</form>
+
+<div class="row g-4">
+    {% for a in results %}
+    <div class="col-md-3">
+        <div class="card bg-secondary text-light">
+            <img src="{{ a.image_url }}" class="card-img-top" style="height:200px;object-fit:cover">
+            <div class="card-body">
+                <h5>{{ a.name }}</h5>
+                <a href="/item/artist/{{ a.id }}" class="btn btn-warning btn-sm">Voir</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
