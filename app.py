@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, redirect, session
+import os
+import pymysql
+from flask import Flask, render_template, request, redirect, session, jsonify 
 from core.media_factory import MediaFactory
 from services.auth_service import AuthService
 from services.ranking_service import RankingService
@@ -12,6 +14,52 @@ app = Flask(__name__)
 app.secret_key = "SUPER_SECRET_KEY"  # à changer en production
 
 
+
+
+try:
+        
+        connection = pymysql.connect(
+            host=os.environ.get('MYSQL_HOST', 'mysql-208df5e7-rottenmusic1.h.aivencloud.com'),
+            port=int(os.environ.get('MYSQL_PORT', 15702)),
+            user=os.environ.get('MYSQL_USER', 'avnadmin'),
+            password=os.environ.get('MYSQL_PASSWORD', 'AVNS_-WeW01A2jy_U9Lmd_Fe'),
+            database=os.environ.get('MYSQL_DATABASE', 'defaultdb'),
+            charset='utf8mb4',
+            cursorclass=pymysql.cursors.DictCursor,
+            ssl={'ca': '/app/ca.pem'}  # Important pour Aiven
+        )
+        return connection
+    except Exception as e:
+        print(f"Erreur de connexion MySQL: {e}")
+        raise
+
+@app.route('/')
+def index():
+    return {
+        "status": "ok", 
+        "message": "Flask + Aiven MySQL sur Render fonctionne !"
+    }
+
+@app.route('/test-db')
+def test_db():
+    """Test de connexion à MySQL"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT VERSION() as mysql_version, NOW() as current_time")
+        result = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return {
+            "status": "success", 
+            "message": "Connexion MySQL réussie !",
+            "data": result
+        }
+    except Exception as e:
+        return {
+            "status": "error", 
+            "message": str(e)
+        }, 500
 # -------------------------------------
 # ROUTE : HOME (liste des artistes et albums)
 # -------------------------------------
