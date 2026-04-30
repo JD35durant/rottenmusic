@@ -10,13 +10,13 @@ from repositories.album_repo import AlbumRepository
 from repositories.review_repo import ReviewRepository
 from services.auth_service import AuthService
 from db import get_db
-app = Flask(__name__)
-app.secret_key = "SUPER_SECRET_KEY"  # à changer en production
+app = Flask(__rottenmusic__)
 
 
 
 
-try:
+
+    try:
         
         connection = pymysql.connect(
             host=os.environ.get('MYSQL_HOST', 'mysql-208df5e7-rottenmusic1.h.aivencloud.com'),
