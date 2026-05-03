@@ -1,7 +1,7 @@
 import os
 import pymysql
 from flask import Flask, render_template, request, redirect, session, jsonify
-from core.media_factory import MediaFactory
+#from core.media_factory import MediaFactory
 from services.auth_service import AuthService
 from services.ranking_service import RankingService
 from services.image_service import ImageService
