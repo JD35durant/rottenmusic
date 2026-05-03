@@ -1,13 +1,14 @@
 import os
 import pymysql
 from flask import Flask, render_template, request, redirect, session, jsonify
-from services.auth_service import AuthService
-from services.ranking_service import RankingService
-from services.image_service import ImageService
-from repositories.artist_repo import ArtistRepository
-from repositories.album_repo import AlbumRepository
-from repositories.review_repo import ReviewRepository
-from db import get_db
+import AuthService
+import RankingService
+import ImageService
+import ArtistRepository
+import AlbumRepository
+import ReviewRepository
+import MediaFactory
+import get_db
 app = Flask(__name__)
 app.secret_key = "SUPER_SECRET_KEY"  # à changer en production
 
