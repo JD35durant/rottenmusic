@@ -2,6 +2,7 @@ import os
 import pymysql
 from flask import Flask, render_template, request, redirect, session, jsonify
 import auth_service as AuthService
+import user_repo as UserRepository
 import ranking_service as RankingService
 import image_service as ImageService
 import artist_repo as ArtistRepository
